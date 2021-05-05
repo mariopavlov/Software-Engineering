@@ -23,6 +23,10 @@ def get_fixed_location(telephone):
 
 
 def get_area_code(telephone):
+    """ Returns area code from a telephone number
+    :param telephone: single telephone number
+    :return: Area code
+    """
 
     code_type = get_telephone_type(telephone)
 
@@ -33,3 +37,23 @@ def get_area_code(telephone):
         return area_code[0]
     else:
         return telephone[:4]
+
+
+def extract_duration(single_call, phone_calls):
+    """ Receives single row from the raw data,
+    and extracts duration for both receivers and callers """
+
+    caller = single_call[0]
+    receiver = single_call[1]
+    duration = int(single_call[3])
+
+    if caller in phone_calls:
+        phone_calls[caller] += duration
+    else:
+        phone_calls[caller] = duration
+
+    if receiver in phone_calls:
+        phone_calls[receiver] += duration
+    else:
+        phone_calls[receiver] = duration
+

@@ -41,5 +41,21 @@ class TestCodeType(unittest.TestCase):
         self.assertEqual('94489', result)
 
 
+class TestExtractDurations(unittest.TestCase):
+    def test_longest_duration_from_multiple_calls(self):
+        phone_calls = {}
+        calls = [
+            ['(080)40395498', '98453 94494', '1/9/2016 6:01', '186'],
+            ['(080)40395498', '98453 94494', '1/9/2016 7:31', '1560'],
+            ['97425 79921', '98453 94494', '1/9/2016 20:48', '9']
+        ]
+
+        for call in calls:
+            telephones.extract_duration(call, phone_calls)
+
+        most_time_spent = max(phone_calls, key=phone_calls.get)
+        self.assertEqual('98453 94494', most_time_spent)
+
+
 if __name__ == '__main__':
     unittest.main()

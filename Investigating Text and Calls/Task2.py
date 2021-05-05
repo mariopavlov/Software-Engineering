@@ -3,26 +3,29 @@ Read file into texts and calls.
 It's ok if you don't understand how to read files
 """
 import csv
-with open('texts.csv', 'r') as f:
-    reader = csv.reader(f)
-    texts = list(reader)
+import telephones
+
+
+# I dont need to iterate over texts file for this task.
+# So I can comment out the creation of the list
+# with open('texts.csv', 'r') as f:
+# reader = csv.reader(f)
+# texts = list(reader)
+
+phone_calls = {}
+
 
 with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
 
-    longest_call = 0
-    telephone_number = ''
-
     for call in calls:
-        call_duration = int(call[3])
+        telephones.extract_duration(call, phone_calls)
 
-        if call_duration > longest_call:
-            longest_call = call_duration
-            telephone_number = call[0]
-
-    print(f'{telephone_number} spent the longest time, {longest_call} seconds, on the phone during September 2016.')
-
+# Finding maximum dict.value, and returning key for that value
+    max_key = max(phone_calls, key=phone_calls.get)
+    print(f'{max_key} spent the longest time,' +
+          f' {phone_calls[max_key]} seconds, on the phone during September 2016.')
 
 """
 TASK 2: Which telephone number spent the longest time on the phone
