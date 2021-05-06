@@ -7,10 +7,12 @@ def get_telephone_type(telephone):
 
     if telephone.startswith('140'):
         return 'telemarketers'
-    elif telephone.startswith('('):
+    elif telephone.startswith('(0'):
         return 'fixed'
-    else:
+    elif telephone.startswith(('7', '8', '9')):
         return 'mobile'
+    else:
+        return 'unknown'
 
 
 def get_fixed_location(telephone):

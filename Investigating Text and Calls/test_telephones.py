@@ -12,9 +12,25 @@ class TestTelephoneType(unittest.TestCase):
         result = telephones.get_telephone_type('(080)43215621')
         self.assertEqual('fixed', result)
 
-    def test_mobile(self):
+    def test_wrong_fixed(self):
+        result = telephones.get_telephone_type('(123)45678')
+        self.assertEqual('unknown', result)
+
+    def test_mobile_starting7(self):
+        result = telephones.get_telephone_type('74489 72078')
+        self.assertEqual('mobile', result)
+
+    def test_mobile_starting8(self):
+        result = telephones.get_telephone_type('84489 72078')
+        self.assertEqual('mobile', result)
+
+    def test_mobile_starting9(self):
         result = telephones.get_telephone_type('94489 72078')
         self.assertEqual('mobile', result)
+
+    def test_wrong_mobile(self):
+        result = telephones.get_telephone_type('12345 67899')
+        self.assertEqual('unknown', result)
 
 
 class TestFixedLocation(unittest.TestCase):
@@ -38,7 +54,7 @@ class TestCodeType(unittest.TestCase):
 
     def test_mobile(self):
         result = telephones.get_area_code('94489 7229')
-        self.assertEqual('94489', result)
+        self.assertEqual('9448', result)
 
 
 class TestExtractDurations(unittest.TestCase):
