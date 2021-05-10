@@ -231,35 +231,42 @@ For every input file (texts and calls):
 For the whole task (considered as a module) time complexity is:
 $O(4 \cdot n)$
 
-### Task 2: Longest Phone Call
+### Task 2: Number with most time on phone
 
-In this task I need to find the longest Phone call that is stored in **`calls.csv`**, and output the following information:
+Initially I misunderstand the problem to be solved, so I need second pass on the problem. 
+
+Initially I considered:
+In this task I need to find the longest Phone call that is stored in **`calls.csv`**. 
+
+But the problem requires from me to find the phone number that spent most time on the phone during the whole month. Which means that I need to sum both incoming and outgoing call times, and then find the number with maximum amount spent on the phone.
+
+Output should be presented in the form:
 **`"<telephone number> spent the longest time, <total time> seconds, on the phone during September 2016."`**
 
-I can think of couple solutions:
-- Go for each record and compare the time duration;
-- Sort the list by duration field and pick first/last record depending on the sorting criteria;
-
-In the previous task [[#Task 1 Counting unique telephone numbers]] I already have performed going record by record to search for unique numbers. This will easily give me again time complexity of $O(2 \cdot n)$, comparing with sorting methods that are outlined in the project **`Timsort`** and **`Samplesort`** I will get the same time complexity if not worse. 
-
-Based on that I will go with the linear search in the whole list. Also, I will not consider which record to choose if two or more call records are with the same duration. I will simply get the first record found.
+Reviewer gave me a hint to use dictionary, that will hold in the same way as a set the phone number, but then I can easily add new field to store and increment the time spent with each next row from phone calls CSV file.
 
 #### Flowchart
 
-![[Pasted image 20210503151919.png]]
+![[Pasted image 20210506100741.png]]
 
 #### Analysis
 
-Most of the operation that are happening in this task have been already discussed in the previous tasks. The difference here is in the for loop:
-- Creating list from input csv file is **Linear operation** $O(n)$
-- Converting duration from string to integer is **Constant operation**
+This task looks like a simple one on the first reading, however there are tricky parts, that most probably will lead to complexities that are not very good. Starting with the list creation:
+- As observed in the previous task creating list from input CSV file is **Linear operation** $O(n)$
+- **`extract_duration`** uses lots of built-in function, but they will lead to complicated running time because of the operations performed (**$O(n^2)$**)
+    - setting 3 variables from the input is **Constant time operation** (it is not very interesting);
+    - comparison itself is a **Constant time operation**, but in my case I'm calling **dictionary `in operator`**, which compared to Hash tables should more more of a **Constant operation**. But taking a look at dictionaries in Python and time complexity for this operator I can see that worst-case runtime is **$O(n)$**[^wiki-time-complexity] (strangely it acts like a normal search not key hash lookup);
+    - based on the decision taken in the previous comparison I have add operation to a dictionary that happens always no mater the outcome of the previous step. Again taking a look at complexities[^wiki-time-complexity] I can see that **dictionary Set operation** has worst case runtime **$O(n)**;
+    - based on the observation I can conclude that my **`extract_duration` function** may have worst case **Quadratic time complexity: $O(n^2)$** (based on numerous facts the runtime can be **Constant** $O(1)$, but I will take the worst-case);
 - Iterating over a list is **Linear** $O(n)$
-- If condition is by itself does have $O(1)$ complexity, but it depends a lot on what operation is performed. In my case the operation of setting variable is constant time. So the whole operation will have **Constant time complexity**.
+    - Inside the iteration I have a call to **`extract_duration`**, which I'm considering to have a **Quadratic** complexity added with the iteration operation I end up at **Cubic time complexity: $O(n^3)$**;
+- Getting **`max`** value and key from dictionary has **Linear complexity** due to the fact that I need to iterate over all element to search and find the biggest value (considering that the dictionary is not ordered by values, and there are no further advanced implementation on-top that can speed up this find operation);
 
-#### #### Task 2 time complexity
+#### Task 2 time complexity
 
-**Absolutely complexity**: $O(2 \cdot n)$
-**Relative complexity: $O(n)$**
+Taking into consideration the observations from above:
+**Absolutely complexity**: $O(2 \cdot n + n^3)$;
+**Relative complexity: $O(n^3)$** (This is a running time that I should prefer to optimize and look for simpler solutions if possible, but at this stage I'm not going to look for improvements);
 
 ### Task 3: Bangalore Call Statistics
 
@@ -282,10 +289,13 @@ Task 3
 ![[Pasted image 20210503151951.png]]
 
 Helper functions
-![[Pasted image 20210503121037.png]]
+**`get_telephone_type`**
+![[Pasted image 20210506113001.png]]
 
+**`get_fixed_location`**
 ![[Pasted image 20210503121043.png]]
 
+**`get_area_code`**
 ![[Pasted image 20210503121050.png]]
 
 #### Analysis
@@ -295,7 +305,8 @@ Going from backward of the solution, I had to take a decision whether to extend 
 Now getting into analyzing the **Helper functions**.
 
 Helper function to find what telephone type we are dealing with: **get_telephone_type**:
-- in this helper function we do have two comparisons with **str.startswith**. I did not manage to find how the function is implemented, but for the sake of this exercise I can guess that it compares symbol by symbol. In normal circumstances this translates to **Linear complexity** - $O(n)$, but in my scenarios I'm comparing fixed width strings every time, so I will consider the operation as a **Constant**.
+- In this helper function we do have two comparisons with **str.startswith**. I did not manage to find how the function is implemented, but for the sake of this exercise I can guess that it compares symbol by symbol. In normal circumstances this translates to **Linear complexity** - $O(n)$, but in my scenarios I'm comparing fixed width strings every time, so I will consider the operation as a **Constant**;
+- For mobile phones I'm performing search against tuple, which will translate in my case as a 3 times **Constant** operation, which is still **Constant**. There is alternative way to solve the problem by looking at the input as an array/list, and comparing the first character against either 7 or 8 or 9. However, due to the Pythonic way of solving problems I will prefer not the hacky brute way but the standard for the community, guessing that experienced developers will look up for **`startswith`** rather than hacky array solution;
 
 Helper function that finds the area code **get_area_code**:
 - First we have a **constant operation** call to **get_telephone_type**;
@@ -332,19 +343,18 @@ The job for me here is to find all telemarketer phones in both **`texts.csv`** a
 
 #### Flowchart
 
-![[Pasted image 20210504211002.png]]
+![[Pasted image 20210510093442.png]]
 
 #### Analysis
 
 Most of the code is reused from the previous Task (although the fact that is copy and paste). So I will analyze only bits and parts of the code.
 
-- starting from the end, **sorted (Timsort)** has **Linearithmic** time according to the documentations $O(n \cdot log \: n)$;
-- going to the new function from this module: **`find_non_telemarketers`** I have for loop for every element in the input list, which translated to **$O(n)$**. Then for every element that is **telemarketer** I have **add operation** to a **set** which translates to another **$O(n)$**. Even though not every element will be **telemarketer** there is a possibility in which all the numbers are **telemarketers**. Time complexity for the function is: **$O(n^2)$**;
-- for the same reason as above **`filter_telemarketers`** (the **set**) I conclude that the time complexity is again: **$O(n^2)$** (even though the chance is smaller than the previous to hit all records);
+- looping through both calls and texts: **`find_non_telemarketers`** I have for loop for every element in the input list, which translated to **$O(n)$**. Assuming that check the type of number is **Constant time**, for every element that is **telemarketer** I have **add operation** to a **set** which translates to another **$O(n)$**[^wiki-time-complexity]. Even though not every element will be **telemarketer** there is a possibility in which all the numbers are **telemarketers**. Time complexity for the iteration is: **$O(n^2)$** (because the two **add operations** are one after another - they are not nested, I'm not calculating the complexity as **Cubic**);
+- Looking for difference between two sets translates to **$O(len(n))$**[^wiki-time-complexity], where **$n$** is the size of the set(**`callers`**). Again there is a slight chance this to produce a running complexity time **$O(n)**, nevertheless I already have slower part of my solution;
 
 #### Task 4 time complexity
 
-As we are having three operations to compare, two of which are with **Quadratic time** and one is with **Linearithmic (Log-linear Time)** the slower of them is **Quadratic**[^complexity-cheetsheet].
+As we are having three operations to compare, two of which are with **Quadratic time** and one is with **Linear** the slower of them is **Quadratic**[^complexity-cheetsheet]. **Absolute complexity**: $O(2 \cdot n^2 + n)$;
 
 For the whole module, time complexity is: **Quadratic Time - $O(n^2)$**
 
