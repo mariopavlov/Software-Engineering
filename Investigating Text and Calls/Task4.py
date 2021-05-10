@@ -13,8 +13,6 @@ callers = set()
 # Outgoing calls, sending text and receiving texts
 non_telemarketers = set()
 
-filter_by = 'telemarketers'
-
 
 # Pass through texts.csv file and look for telemarketers numbers
 with open('texts.csv', 'r') as f:
@@ -24,14 +22,9 @@ with open('texts.csv', 'r') as f:
     for text in texts:
         sender = text[0]
         receiver = text[1]
-        outgoing_type = telephones.get_telephone_type(sender)
-        receiver_type = telephones.get_telephone_type(receiver)
 
-        if outgoing_type == filter_by:
-            non_telemarketers.add(sender)
-
-        if receiver_type == filter_by:
-            non_telemarketers.add(receiver)
+        non_telemarketers.add(sender)
+        non_telemarketers.add(receiver)
 
 
 # Pass through calls.csv and look for telemarketers numbers
@@ -42,15 +35,9 @@ with open('calls.csv', 'r') as f:
     for call in calls:
         caller = call[0]
         receiver = call[1]
-        outgoing_type = telephones.get_telephone_type(caller)
-        receiver_type = telephones.get_telephone_type(receiver)
 
-        if outgoing_type == filter_by:
-            callers.add(caller)
-
-        if receiver_type == filter_by:
-            non_telemarketers.add(receiver)
-
+        callers.add(caller)
+        non_telemarketers.add(receiver)
 
 # Look for telemarketers
 telemarketers = callers.difference(non_telemarketers)
