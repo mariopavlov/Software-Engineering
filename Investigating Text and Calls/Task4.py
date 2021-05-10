@@ -6,57 +6,54 @@ import csv
 import telephones
 
 
-telemarketers = set()
+# Set to store all caller telemarketer numbers
+callers = set()
 
 # Set of Phone numbers that are extracted from
 # Outgoing calls, sending text and receiving texts
 non_telemarketers = set()
 
-
-def find_non_telemarketers(data_list, is_texts):
-    """ Iterating over calls and texts files looking for non-telemarketers """
-
-    for item in data_list:
-        # It is either sender or caller depending on the input
-        sender = item[0]
-        receiver = item[1]
-
-        sender_type = telephones.get_telephone_type(sender)
-        receiver_type = telephones.get_telephone_type(receiver)
-
-        if is_texts and sender_type == 'telemarketers':
-            non_telemarketers.add(sender)
-
-        if receiver_type == 'telemarketers':
-            non_telemarketers.add(receiver)
+filter_by = 'telemarketers'
 
 
-def filter_telemarketers(data_list):
-    """ Iterate over calls file and filter out telemarketers """
-
-    for call in data_list:
-        caller_number = call[0]
-
-        caller_type = telephones.get_telephone_type(caller_number)
-
-        if caller_type == 'telemarketers':
-            if caller_number not in non_telemarketers:
-                telemarketers.add(caller_number)
-
-
+# Pass through texts.csv file and look for telemarketers numbers
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
     texts = list(reader)
 
-    find_non_telemarketers(texts, is_texts=True)
+    for text in texts:
+        sender = text[0]
+        receiver = text[1]
+        outgoing_type = telephones.get_telephone_type(sender)
+        receiver_type = telephones.get_telephone_type(receiver)
 
+        if outgoing_type == filter_by:
+            non_telemarketers.add(sender)
+
+        if receiver_type == filter_by:
+            non_telemarketers.add(receiver)
+
+
+# Pass through calls.csv and look for telemarketers numbers
 with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
 
-    find_non_telemarketers(calls, is_texts=False)
-    filter_telemarketers(calls)
+    for call in calls:
+        caller = call[0]
+        receiver = call[1]
+        outgoing_type = telephones.get_telephone_type(caller)
+        receiver_type = telephones.get_telephone_type(receiver)
 
+        if outgoing_type == filter_by:
+            callers.add(caller)
+
+        if receiver_type == filter_by:
+            non_telemarketers.add(receiver)
+
+
+# Look for telemarketers
+telemarketers = callers.difference(non_telemarketers)
 
 print('These numbers could be telemarketers: ')
 for item in sorted(telemarketers):
