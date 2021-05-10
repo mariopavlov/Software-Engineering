@@ -343,13 +343,13 @@ The job for me here is to find all telemarketer phones in both **`texts.csv`** a
 
 #### Flowchart
 
-![[Pasted image 20210510093442.png]]
+![[Pasted image 20210510114230.png]]
 
 #### Analysis
 
 Most of the code is reused from the previous Task (although the fact that is copy and paste). So I will analyze only bits and parts of the code.
 
-- looping through both calls and texts: **`find_non_telemarketers`** I have for loop for every element in the input list, which translated to **$O(n)$**. Assuming that check the type of number is **Constant time**, for every element that is **telemarketer** I have **add operation** to a **set** which translates to another **$O(n)$**[^wiki-time-complexity]. Even though not every element will be **telemarketer** there is a possibility in which all the numbers are **telemarketers**. Time complexity for the iteration is: **$O(n^2)$** (because the two **add operations** are one after another - they are not nested, I'm not calculating the complexity as **Cubic**);
+- looping through both calls and texts: I have **`for loop`** for every element in the input list, which translated to **$O(n)$**. For every element I have **add operation** to a **set** which translates to another **$O(n)$**[^wiki-time-complexity]. Time complexity for the iteration is: **$O(n^2)$** (because the two **add operations** are one after another - they are not nested, I'm not calculating the complexity as **Cubic**);
 - Looking for difference between two sets translates to **$O(len(n))$**[^wiki-time-complexity], where **$n$** is the size of the set(**`callers`**). Again there is a slight chance this to produce a running complexity time **$O(n)**, nevertheless I already have slower part of my solution;
 
 #### Task 4 time complexity
