@@ -13,12 +13,18 @@ def merge(list1, list2):
     head1 = list1.head
     head2 = list2.head
 
-    while head1 and head2 is not None:
-        if head1.value > head2.value:
-            result.append(head1)
+    while head1 or head2 is not None:
+        if head1 is None:
+            result.append(head2.value)
+            head2 = head2.next
+        elif head2 is None:
+            result.append(head1.value)
+            head1 = head1.next
+        elif head1.value < head2.value:
+            result.append(head1.value)
             head1 = head1.next
         else:
-            result.append(head2)
+            result.append(head2.value)
             head2 = head2.next
 
     return result

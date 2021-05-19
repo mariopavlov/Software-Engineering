@@ -1,12 +1,21 @@
 class Node:
     def __init__(self, value):
+        """ Value can be either integer value or HEAD to another list """
         self.value = value
         self.next = None
 
 
 class LinkedList:
-    def __init__(self):
-        self.head = None
+    def __init__(self, value=None):
+        """ Init value expects either List head (node element) or integer value. """
+
+        if value is not None:
+            if type(value) is int:
+                self.head = Node(value)
+            else:
+                self.head = value
+        else:
+            self.head = None
 
     def to_list(self):
         out = []
