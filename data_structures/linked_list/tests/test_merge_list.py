@@ -7,9 +7,6 @@ class MergeListTests(unittest.TestCase):
     def test_empty_lists(self):
         """ Providing two empty lists, we need to receive new empty list """
 
-        for item in sys.path:
-            print(f'PATH: {item}')
-
         list1 = linked_list.LinkedList()
         list2 = linked_list.LinkedList()
 
