@@ -1,7 +1,9 @@
-import linked_list as ll
+import sys
+from src.concepts.linked_list import LinkedList
 
+print(f'Path: {sys.path}')
 
-linked_list = ll.LinkedList()
+linked_list = LinkedList()
 linked_list.append(1)
 linked_list.append(2)
 linked_list.append(1)
@@ -44,14 +46,6 @@ print(f'Insert element at [1]: {linked_list.to_list()}')
 print(f'List size is: {linked_list.size()}')
 
 
-def reverse(linked_list):
-    """ Returns reversed version of a list """
-    temp = ll.LinkedList()
-
-    for item in linked_list:
-        temp.prepend(item)
-
-    return temp
 
 
 reversed_list = reverse(linked_list)
@@ -85,7 +79,7 @@ def is_circular(linked_list):
 
 
 # Test Cases
-list_with_loop = ll.LinkedList()
+list_with_loop = LinkedList()
 list_with_loop.create_from_list([2, -1, 3, 0, 5])
 
 print(f'List after Init: {list_with_loop.to_list()}')
@@ -103,7 +97,7 @@ while node.next:
 # create the Loop by setting the last element to point to the second
 node.next = loop_start
 
-empty_linked = ll.LinkedList()
+empty_linked = LinkedList()
 empty_linked.create_from_list([])
 
 print(f'Circular Loop?: {is_circular(list_with_loop)}')
