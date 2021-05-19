@@ -12,6 +12,8 @@ class LinkedList:
         if value is not None:
             if type(value) is int:
                 self.head = Node(value)
+            elif type(value) is list:
+                self.create_from_list(value)
             else:
                 self.head = value
         else:
