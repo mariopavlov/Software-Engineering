@@ -27,14 +27,15 @@ class LinkedListCircular(unittest.TestCase):
 
     def test_non_circular_list(self):
         list_without_loop = LinkedList([2, -1, 3, 0, 5])
-        print(list_without_loop.to_list())
 
         circular = is_circular(list_without_loop)
 
         self.assertEqual(False, circular)
 
     def test_empty_list_for_circularity(self):
-        pass
+        empty_list = LinkedList([])
+
+        self.assertEqual(False, is_circular(empty_list))
 
 
 if __name__ == '__main__':
