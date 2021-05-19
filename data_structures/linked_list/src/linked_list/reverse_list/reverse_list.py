@@ -1,4 +1,4 @@
-from src.concepts.linked_list import LinkedList
+from data_structures.linked_list.src.linked_list import LinkedList
 
 
 def reverse(linked_list):

@@ -1,7 +1,6 @@
 import unittest
 import sys
-import src.concepts.linked_list.merge_list as merge_list
-import src.concepts.linked_list.linked_list as linked_list
+import data_structures.linked_list.src.linked_list as linked_list
 
 
 class MergeListTests(unittest.TestCase):
@@ -14,7 +13,7 @@ class MergeListTests(unittest.TestCase):
         list1 = linked_list.LinkedList()
         list2 = linked_list.LinkedList()
 
-        merged_list = merge_list.merge(list1, list2)
+        merged_list = linked_list.merge(list1, list2)
 
         self.assertEqual([], merged_list.to_list())
 
