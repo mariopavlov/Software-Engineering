@@ -1,5 +1,4 @@
 import unittest
-import sys
 import data_structures.linked_list.src.linked_list as linked_list
 
 
