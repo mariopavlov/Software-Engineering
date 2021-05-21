@@ -35,22 +35,37 @@ class NestedListTests(unittest.TestCase):
 
     def test_2_nested_lists(self):
         """ Test the most basic variant with 2 nested lists """
+        temp = self.nested
 
         expected = [1, 2, 3, 4, 5, 6, 7, 8]
+        result = temp.flatten().to_list()
+
+        print(f'result type: {type(result)}, {result}')
+        self.assertEqual(expected, result)
+
+    def test_3_nested_lists(self):
+        """ Test flatten method with Odd number of nested lists """
+
+        list3 = LinkedList([11, 13, 15, 99, 102])
+        self.nested.append(list3)
+
+        expected = [1, 2, 3, 4, 5, 6, 7, 8, 11, 13, 15, 99, 102]
         result = self.nested.flatten().to_list()
 
         self.assertEqual(expected, result)
 
     def test_4_nested_lists(self):
         """ Extend basic NestedList with 2 more nested lists, and test the outcome """
+        temp = self.nested
+
         list3 = LinkedList([9])
         list4 = LinkedList([10])
 
-        self.nested.append(list3)
-        self.nested.append(list4)
+        temp.append(list3)
+        temp.append(list4)
 
         expected = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-        result = self.nested.flatten().to_list()
+        result = temp.flatten().to_list()
 
         self.assertEqual(expected, result)
 
