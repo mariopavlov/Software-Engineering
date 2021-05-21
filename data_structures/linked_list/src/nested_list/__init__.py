@@ -1,2 +1,2 @@
 # __init__.py
-from nested_list import NestedList
+from .nested_list import NestedList
