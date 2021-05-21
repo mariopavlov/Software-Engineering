@@ -1,4 +1,5 @@
 from ..linked_list import LinkedList
+from ..linked_list import merge
 
 
 class NestedList(LinkedList):
@@ -6,6 +7,9 @@ class NestedList(LinkedList):
 
     def flatten(self):
         """ """
-        result = LinkedList()
+        list1 = self.head.value
+        list2 = self.head.next.value
+
+        result = merge(list1, list2)
 
         return result
