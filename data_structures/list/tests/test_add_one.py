@@ -22,7 +22,7 @@ class AddOneTests(unittest.TestCase):
 
         result = add_one(arr)
 
-        self.assertEqual(['1'], result)
+        self.assertEqual(['2'], result)
 
     def test_999(self):
         arr = ['9', '9', '9']
