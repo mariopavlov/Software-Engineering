@@ -11,6 +11,13 @@ class AddOneTests(unittest.TestCase):
 
         self.assertEqual([], result)
 
+    def test_1(self):
+        arr = ['1']
+
+        result = add_one(arr)
+
+        self.assertEqual(['1'], result)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -9,4 +9,7 @@ def add_one(arr):
     """
     result = []
 
+    number = int(''.join(str(digit) for digit in arr))
+    print(number)
+
     return result
