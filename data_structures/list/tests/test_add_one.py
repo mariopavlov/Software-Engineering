@@ -11,12 +11,25 @@ class AddOneTests(unittest.TestCase):
 
         self.assertEqual([], result)
 
+    def test_0(self):
+        arr = ['0']
+        result = add_one(arr)
+
+        self.assertEqual(['1'], result)
+
     def test_1(self):
         arr = ['1']
 
         result = add_one(arr)
 
         self.assertEqual(['1'], result)
+
+    def test_999(self):
+        arr = ['9', '9', '9']
+
+        result = add_one(arr)
+
+        self.assertEqual(['1','0','0','0'], result)
 
 
 if __name__ == '__main__':
