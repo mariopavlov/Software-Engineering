@@ -8,8 +8,11 @@ def add_one(arr):
     @return: List representing number
     """
     result = []
-
-    number = int(''.join(str(digit) for digit in arr))
-    print(number)
+    
+    try:
+        number = int(''.join(str(digit) for digit in arr))
+    except ValueError:
+        # Handle the exception
+        print('Please enter an integer')
 
     return result
