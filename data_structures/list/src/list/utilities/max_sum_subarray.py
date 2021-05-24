@@ -7,4 +7,11 @@ def max_sum_subarray(arr):
     @param arr: List of numbers (negative and positive)
     @return: Maximum sum inside the number that is not separated from Sub-array
     """
-    pass
+    current_sum = 0
+    max_sum = 0
+
+    for element in arr:
+        current_sum = max(current_sum + element, element)
+        max_sum = max(current_sum, max_sum)
+
+    return max_sum
