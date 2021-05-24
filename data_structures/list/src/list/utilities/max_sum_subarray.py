@@ -11,7 +11,11 @@ def max_sum_subarray(arr):
     max_sum = 0
 
     for element in arr:
-        current_sum = max(current_sum + element, element)
-        max_sum = max(current_sum, max_sum)
+        try:
+            current_sum = max(current_sum + element, element)
+            max_sum = max(current_sum, max_sum)
+        except TypeError:
+            print('Input List is not in correct format. Please submit only numerical elements!')
+            return None
 
     return max_sum
