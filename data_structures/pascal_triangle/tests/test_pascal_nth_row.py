@@ -28,13 +28,13 @@ class PascalTriangleGetRowTests(unittest.TestCase):
         self.assertEqual(expected, row)
 
     def test_fourth_row(self):
-        row = 3
+        row = nth_row_pascal(3)
         expected = [1, 3, 3, 1]
 
         self.assertEqual(expected, row)
 
     def test_fifth_row(self):
-        row = 4
+        row = nth_row_pascal(4)
         expected = [1, 4, 6, 4, 1]
 
         self.assertEqual(expected, row)
