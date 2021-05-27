@@ -17,4 +17,19 @@ def skip_delete_elements(linked_list, i, j):
     delete_count = j
     result = LinkedList()
 
+    elem = linked_list.head
+
+    while elem is not None:
+        if skip_count > 0:
+            skip_count -= 1
+            result.append(elem.value)
+        else:
+            delete_count -= 1
+
+            if delete_count is 0:
+                skip_count = i
+                delete_count = j
+
+        elem = elem.next
+
     return result
