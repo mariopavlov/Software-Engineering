@@ -11,6 +11,16 @@ class SkipDeleteElementsTests(unittest.TestCase):
 
         self.assertEqual(expected, result.to_list())
 
+    def test_skip0_delete1(self):
+        # Basically I would have empty list here
+        arr = LinkedList([1, 2, 3, 4, 5])
+        i = 0
+        j = 1
+        result = skip_delete_elements(arr, i, j)
+        expected = []
+
+        self.assertEqual(expected, result.to_list())
+
     def test_skip2_delete0(self):
         arr = LinkedList([1, 2, 3, 4, 5])
         i = 2
