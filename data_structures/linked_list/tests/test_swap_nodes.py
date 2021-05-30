@@ -14,7 +14,7 @@ class SwapNodesTests(unittest.TestCase):
         self.assertEqual(expected, link_list.to_list())
 
     def test_swap_0_and_1(self):
-        arr = [3, 4, 5, 2, 6, 1, 9]
+        arr = [0, 1, 2, 3, 4, 5, 6, 7]
         link_list = LinkedList(arr)
         left = 0
         right = 1
@@ -67,6 +67,15 @@ class SwapNodesTests(unittest.TestCase):
         link_list = LinkedList(arr)
         left = -1
         right = 3
+        result = swap_nodes(link_list, left, right)
+        expected = None
+
+        self.assertEqual(expected, result)
+
+    def test_empty_list(self):
+        link_list = LinkedList()
+        left = 3
+        right = 4
         result = swap_nodes(link_list, left, right)
         expected = None
 
