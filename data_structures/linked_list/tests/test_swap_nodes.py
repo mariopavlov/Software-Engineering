@@ -81,6 +81,15 @@ class SwapNodesTests(unittest.TestCase):
 
         self.assertEqual(expected, result)
 
+    def test_true_on_swap(self):
+        link_list = LinkedList([0, 1, 2, 3])
+        left = 0
+        right = 1
+        result = swap_nodes(link_list, left, right)
+        expected = True
+
+        self.assertEqual(expected, result)
+
 
 if __name__ == '__main__':
     unittest.main()
