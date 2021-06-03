@@ -30,27 +30,31 @@ def swap_nodes(link_list, left, right):
     # Used both as a counter and LinkedList size
     counter = 0
     elem = link_list.head
+    # Initially the prev element should be None
+    # (this may cause issue with the Head pointer check!)
+    prev_element = None
 
     # Elements needed for the swap
     first = None
     first_prev = None
-    temp = None
+    first_next = None
     second = None
     second_prev = None
 
     while elem is not None:
-        if counter == left - 1:
-            first_prev = elem
-            first = elem.next
-            temp = first.next
+        if counter == left:
+            first_prev = prev_element
+            first = elem
+            first_next = first.next
 
-        if counter == right - 1:
-            second_prev = elem
-            second = elem.next
+        if counter == right:
+            second_prev = prev_element
+            second = elem
             break
 
         # Increment Counter and LinkedList
         counter += 1
+        prev_element = elem
         elem = elem.next
 
     if first is None or second is None:
@@ -58,8 +62,18 @@ def swap_nodes(link_list, left, right):
         return None
 
     first.next = second.next
-    second_prev.next = first
-    first_prev.next = second
-    second.next = temp
 
-    return None
+    if first_next is not second:
+        second_prev.next = first
+
+    if first_prev is None:
+        link_list.head = second
+    else:
+        first_prev.next = second
+
+    if first_next is second:
+        second.next = first
+    else:
+        second.next = first_next
+
+    return True
