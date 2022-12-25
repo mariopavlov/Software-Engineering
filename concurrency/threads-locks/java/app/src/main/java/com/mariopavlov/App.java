@@ -4,11 +4,26 @@
 package com.mariopavlov;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
+
+    public static void main(String[] args) throws InterruptedException {
+
+        Thread thread = new Thread() {
+            public void run() {
+                System.out.println("Hello from Thread!");
+            }
+        };
+
+        thread.start();
+
+        // Hint to the scheduler that current thread will Yield current use of processor
+        // Without this statement on almost every execution main thread print statement will execute first
+        Thread.yield();
+
+
+        System.out.println("Hello from Main program");
+        
+        
+        thread.join();
     }
 
-    public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
-    }
 }
