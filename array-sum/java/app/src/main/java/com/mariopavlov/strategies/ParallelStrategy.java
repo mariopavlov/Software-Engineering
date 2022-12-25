@@ -10,7 +10,7 @@ import java.util.concurrent.RecursiveAction;
 
 public class ParallelStrategy implements CalculateStrategy {
 
-    private static final int NUMBER_TASKS = 8;
+    private int number_of_tasks = 2; // Default
 
     private final int low;
     private final int high;
@@ -44,35 +44,25 @@ public class ParallelStrategy implements CalculateStrategy {
 
         @Override
         protected void compute() {
-            /*if (start == end) {
-                value = input[start];
-            } else if (start > end) {
-                value = 0;
-            } else {
-                int mid = (end + start) / 2;
-                ParallelSumTask lowerHalf = new ParallelSumTask(input, start, mid);
-                ParallelSumTask upperHalf = new ParallelSumTask(input, mid + 1, end);
-                // invokeAll(lowerHalf, upperHalf);
-                lowerHalf.compute();
-                upperHalf.compute();
-                value = lowerHalf.value + upperHalf.value;
-            }*/
-
+            // Sequential algorithm
             for (int i = start; i < end; i++) {
                 value += input[i];
             }
         }
     }
 
+    public void setNumberOfTasks(int tasks) {
+        this.number_of_tasks = tasks;
+    }
+
     @Override
     public long sum() {
 
         List<ParallelSumTask> tasks = new ArrayList<>();
-        ForkJoinPool pool = new ForkJoinPool(NUMBER_TASKS);
 
-        for (int task = 0; task < NUMBER_TASKS; task++) {
-            int inclusiveStart = getChunkStartInclusive(task, NUMBER_TASKS, array.length);
-            int exclusiveEnd = getChunkEndExclusive(task, NUMBER_TASKS, array.length);
+        for (int task = 0; task < number_of_tasks; task++) {
+            int inclusiveStart = getChunkStartInclusive(task, number_of_tasks, array.length);
+            int exclusiveEnd = getChunkEndExclusive(task, number_of_tasks, array.length);
 
             // Use this call for Recursive Implementation
             // tasks.add(new ParallelSumTask(array, inclusiveStart, exclusiveEnd - 1));
@@ -95,7 +85,6 @@ public class ParallelStrategy implements CalculateStrategy {
         final int chunkSize = getChunkSize(nChunks, nElements);
         return chunk * chunkSize;
     }
-
 
     private static int getChunkEndExclusive(final int chunk, final int nChunks,
                                             final int nElements) {

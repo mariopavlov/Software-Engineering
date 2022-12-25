@@ -47,7 +47,7 @@ public class ArraySumTest {
 
         RecursiveStrategy recursiveStrategy = new RecursiveStrategy(array, 0, array.length - 1);
         ParallelStrategy parallelStrategy = new ParallelStrategy(array, 0, array.length - 1);
-
+        parallelStrategy.setNumberOfTasks(8);
 
         long expected = -1;
         long actual = -2;
@@ -97,7 +97,6 @@ public class ArraySumTest {
         }
 
         return input;
-
     }
 
 }
