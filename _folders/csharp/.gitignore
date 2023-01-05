@@ -1,0 +1,43 @@
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+bld/
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio
+*.csproj
+*.sln
+*.suo
+*.user
+*.userosscache
+*.vcxproj
+*.vcxproj.filters
+
+# Visual Studio Patch Files
+*.orig
+
+# Visual Studio Launch
+*.vs[aw]
+
+# Visual Studio Extension Settings
+*.vssettings
+
+# Visual Studio Code
+.vscode/
+*.code-workspace
+
+# Windows Store app package directories
+AppPackages/
+BundleArtifacts/
+PackageArtifacts/
+
+# Visual Studio cache/options directory
+.vs/
+
+# Uncomment if I have tasks that create the project's static files in wwwroot
+#wwwroot

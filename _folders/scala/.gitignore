@@ -1,0 +1,95 @@
+# Compiled class file
+*.class
+
+# Log file
+*.log
+
+# BlueJ files
+*.ctxt
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# NetBeans
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nbm/
+nbgradle/
+.nb-gradle/
+
+# Eclipse
+.classpath
+.project
+.settings/
+.cache/
+.metadata/
+bin/
+tmp/
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.loadpath
+
+# Android Studio
+*.iml
+.idea/
+*.ipr
+*.iws
+.gradle/
+build/
+
+# Visual Studio
+.vs/
+*.suo
+*.opensdf
+*.sdf
+*.cachefile
+
+# Maven
+log/
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# sbt
+target/
+lib_managed/
+src_managed/
+project/project/
+project/boot/
+project/build/
+project/target/
+
+# Scala.js
+out/
+
+# IntelliJ
+out/
+
+# ScalaIDE
+.cache-main
+.scala_dependencies
+.worksheet
+
+# Other
+*.history

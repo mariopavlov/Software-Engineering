@@ -1,0 +1,37 @@
+# Compiled files
+*.rlib
+*.lib
+*.a
+*.o
+*.so
+*.dll
+*.dylib
+
+# Build artifacts
+target/
+
+# Third-party dependencies
+vendor/
+
+# Project-local crates and registry
+*.crates.toml
+
+# Cargo registry metadata
+.crates.toml
+
+# cargo-lock.toml and other build metadata files
+.cargo-lock
+Cargo.lock
+Cargo.toml
+
+# Rust-generated documentation
+doc/
+
+# Rustup metadata
+.rustup/
+
+# IntelliJ files
+.idea/
+
+# Other files
+.DS_Store

@@ -1,0 +1,47 @@
+# Prebuilt object files
+*.o
+*.a
+
+# Prebuilt static and dynamic libs
+*.so
+*.dylib
+*.dll
+
+# Compiled Dynamic Shared Objects (DSOs)
+*.so
+
+# Compiled Object files
+*.o
+
+# Compiled Static libraries
+*.a
+
+# Compiled Shared libraries
+*.so
+*.dylib
+*.dll
+
+# Compiled executables
+*.exe
+*.out
+
+# Compiler output
+*.s
+
+# Object files
+*.o
+*.a
+
+# Libraries
+*.so
+*.dylib
+*.dll
+
+# Executables
+*.exe
+*.out
+
+# Temporary files
+*.bak
+*~
+*.tmp

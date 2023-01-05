@@ -1,0 +1,44 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binary, built with `go test -c`
+*.test
+
+# Output of the go coverage tool, specifically when used with LiteIDE
+*.out
+
+# Temporary files
+*.tmp
+
+# Installer for windows
+*.msi
+
+# Log files
+*.log
+
+# OS X Specific
+*.DS_Store
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows Specific
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Go output
+_test/
+*.test
+*.prof
+
+# Go build artifacts
+*.a
+pkg/
+
+# Go dependencies
+vendor/
